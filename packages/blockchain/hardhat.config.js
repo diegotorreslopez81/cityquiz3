@@ -10,7 +10,7 @@ const defaultNetwork = "localhost";
 module.exports = {
   solidity: "0.8.17",
   defaultNetwork,
-
+  allowUnlimitedContractSize: true,
   // don't forget to set your provider like:
   // REACT_APP_PROVIDER=https://dai.poa.network in packages/react-app/.env
   // (then your frontend will talk to your contracts on the live network!)
@@ -20,6 +20,9 @@ module.exports = {
     hardhat:{},
     localhost: {
       url: "http://localhost:8545",
+      allowUnlimitedContractSize: true,
+      gasPrice: 1500000000,
+      gas: 6000000,
       /*
         notice no mnemonic here? it will just use account 0 of the hardhat node to deploy
         (you can put in a mnemonic here to set the deployer locally)

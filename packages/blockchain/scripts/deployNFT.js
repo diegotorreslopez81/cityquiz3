@@ -5,10 +5,10 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const Token = await ethers.getContractFactory("MyEpicNFT");
+  const Token = await ethers.getContractFactory("CityQuiz3NFT");
   const token = await Token.deploy();
 
-  console.log("MyEpicNFT address:", token.address);
+  console.log("CityQuiz3NFT address:", token.address);
 }
 
 main()

@@ -1,7 +1,7 @@
 require("@nomiclabs/hardhat-ethers");
-const contract = require("../artifacts/contracts/MyEpicNFT.sol/MyEpicNFT.json");
+const contract = require("../artifacts/contracts/CityQuiz3NFT.sol/CityQuiz3.json");
 const contractInterface = contract.abi;
-const contractAddress = "0x78a9c881339b69463bfF11b4817Ff6EF44b2782B";
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 let provider = ethers.provider;
 
@@ -21,7 +21,7 @@ const nft = new ethers.Contract(
 const main = () => {
   console.log("Waiting for 5 blocks to confirm...");
   nft
-    .makeAnEpicNFT()
+    .mint("0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec")
     .then((tx) => tx.wait(5))
     .then((receipt) => console.log(`Confirmed! Your transaction receipt is: ${receipt.transactionHash}`))
     .catch((e) => console.log("Something went wrong", e));
