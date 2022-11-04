@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "cityquiz"
+version = "0.1.0"
+description = ""
+authors = ["Cristian Blanco <crismablanco@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.85.1"
+uvicorn = {extras = ["standard"], version = "^0.18.3"}
+SQLAlchemy = "^1.4.42"
+black = "^22.10.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
