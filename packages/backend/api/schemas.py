@@ -1,23 +1,38 @@
-from typing import Union
+from typing import Union, List
 from pydantic import BaseModel
 
-# PROJECT
-class ProjectBase(BaseModel):
-    name: str
-    logo: str
-    description: Union[str, None] = None
+# ANSWER
+class AnswerBase(BaseModel):
+    question_id: int
+    answer: str
+    valid: bool = False
 
-
-class ProjectCreateSchema(ProjectBase):
+class AnswerCreateSchema(AnswerBase):
     pass
 
-
-class ProjectSchema(ProjectBase):
+class AnswerSchema(AnswerBase):
     id: int
-
     class Config:
         orm_mode = True
 
+
+# QUESTION
+class QuestionBase(BaseModel):
+    quiz_id: int
+    question: str
+
+class QuestionCreateSchema(QuestionBase):
+    pass
+class QuestionSchema(QuestionBase):
+    id: int
+    class Config:
+        orm_mode = True
+
+class QuestionToRead(BaseModel):
+    id: int
+    question: str
+    class Config:
+        orm_mode = True
 
 # QUIZ
 class QuizBase(BaseModel):
@@ -28,47 +43,43 @@ class QuizBase(BaseModel):
 class QuizCreateSchema(QuizBase):
     pass
 
-
 class QuizSchema(QuizBase):
     id: int
 
     class Config:
         orm_mode = True
 
+class QuizToRead(BaseModel):
+    id: int
+    name: str
+    questions: List[QuestionToRead]
 
-# QUESTION
-class QuestionBase(BaseModel):
-    quiz_id: int
-    question: str
+    class Config:
+        orm_mode = True
 
+# PROJECT
+class ProjectBase(BaseModel):
+    name: str
+    logo: str
+    description: Union[str, None] = None
 
-class QuestionCreateSchema(QuestionBase):
+class ProjectCreateSchema(ProjectBase):
     pass
 
-
-class QuestionSchema(QuestionBase):
+class ProjectSchema(ProjectBase):
     id: int
+    quizes: List[QuizToRead]
 
     class Config:
         orm_mode = True
 
 
-# ANSWER
-class AnswerBase(BaseModel):
-    question_id: int
-    answer: str
-    valid: bool = False
 
 
-class AnswerCreateSchema(AnswerBase):
-    pass
 
 
-class AnswerSchema(AnswerBase):
-    id: int
 
-    class Config:
-        orm_mode = True
+
 
 
 # Project: "MOONBEAN"
