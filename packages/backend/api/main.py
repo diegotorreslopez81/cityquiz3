@@ -8,6 +8,7 @@ from .schemas import (
     ProjectCreateSchema,
     QuizSchema,
     QuizCreateSchema,
+    QuizToRead,
     QuestionCreateSchema,
     QuestionSchema,
     AnswerCreateSchema,
@@ -59,13 +60,13 @@ def create_quizes(quiz: QuizCreateSchema, db: Session = Depends(get_db)):
     return QuizService.create_quiz(db=db, quiz=quiz)
 
 
-@app.get("/quizes/", response_model=List[QuizSchema])
+@app.get("/quizes/", response_model=List[QuizToRead])
 def read_quizes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     _quizes = QuizService.get_quizes(db, skip=skip, limit=limit)
     return _quizes
 
 
-@app.get("/quizes/{quiz_id}", response_model=QuizSchema)
+@app.get("/quizes/{quiz_id}", response_model=QuizToRead)
 def read_quiz(quiz_id: int, db: Session = Depends(get_db)):
     db_quiz = QuizService.get_quiz(db, quiz_id=quiz_id)
     if db_quiz is None:
