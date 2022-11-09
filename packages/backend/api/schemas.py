@@ -15,6 +15,11 @@ class AnswerSchema(AnswerBase):
     class Config:
         orm_mode = True
 
+class AnswerToRead(BaseModel):
+    id: int
+    answer: str
+    class Config:
+        orm_mode = True
 
 # QUESTION
 class QuestionBase(BaseModel):
@@ -31,6 +36,7 @@ class QuestionSchema(QuestionBase):
 class QuestionToRead(BaseModel):
     id: int
     question: str
+    answers: List[AnswerToRead]
     class Config:
         orm_mode = True
 
