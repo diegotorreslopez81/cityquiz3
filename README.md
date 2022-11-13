@@ -19,7 +19,11 @@ CityQuiz3 is a tool to certificate user's knowledge. By playing a 2D RPG Open Wo
 
 For the MVP, we have implemented a simple mechanic where the user can login or register and complete two quizzes from the Polkadot Ecosystem. When the use complete the quiz, he can mint a personalized NFT like:
 
-![NFT](/assets/NFT.png)
+![NFT](/assets/NFT.jpg)
+
+## Video
+
+[<img src=".\assets\video.jpg" width="50%">](https://cityquiz3.xyz/assets/videos/video01.mp4?v=b43d98da "Now in Android: 55")
 
 
 ## Vision
@@ -43,11 +47,11 @@ Follow the instruction to depoly the [Smart Contracts](https://github.com/diegot
 
 ### Backend:
 
-Follow the instruction on the package [backend](https://github.com/diegotorreslopez81/cityquiz3/tree/main/packages/backend)
+Follow the instruction on the package [Backend](https://github.com/diegotorreslopez81/cityquiz3/tree/main/packages/backend)
 
 ### Frontend:
 
-Follow the instruction tom run the 2D RPG Game [frontend](https://github.com/diegotorreslopez81/cityquiz3/tree/main/packages/frontend)
+Follow the instruction tom run the 2D RPG Game [Frontend](https://github.com/diegotorreslopez81/cityquiz3/tree/main/packages/frontend)
 
 ## Use Cases
 
