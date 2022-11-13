@@ -12,7 +12,11 @@ class AnswerService:
         return db.query(Answer).offset(skip).limit(limit).all()
 
     def create_answer(db: Session, answer: AnswerCreateSchema):
-        db_answer = Answer(question_id=answer.question_id, answer=answer.answer, is_valid=answer.is_valid)
+        db_answer = Answer(
+            question_id=answer.question_id,
+            answer=answer.answer,
+            is_valid=answer.is_valid,
+        )
         db.add(db_answer)
         db.commit()
         db.refresh(db_answer)
