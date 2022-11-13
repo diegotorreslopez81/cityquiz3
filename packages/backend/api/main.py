@@ -10,14 +10,25 @@ from .schemas import (
     QuizSchema,
     QuizCreateSchema,
     QuizToRead,
+    QuizAnswerSchema,
+    QuizAnswerResult,
     QuestionCreateSchema,
     QuestionSchema,
     AnswerCreateSchema,
     AnswerSchema,
+    ProfileSchema,
+    ProfileCreateSchema,
+    ProfileCreateNftSchema,
 )
 
 from .database import SessionLocal, engine, Base
-from .services import ProjectService, QuizService, QuestionService, AnswerService
+from .services import (
+    ProjectService,
+    QuizService,
+    QuestionService,
+    AnswerService,
+    ProfileService,
+)
 
 Base.metadata.create_all(bind=engine)
 
@@ -65,7 +76,7 @@ def read_projects(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 def read_project(project_id: int, db: Session = Depends(get_db)):
     db_project = ProjectService.get_project(db, project_id=project_id)
     if db_project is None:
-        raise HTTPException(status_code=404, detail="project not found")
+        raise HTTPException(status_code=404, detail="Project not found")
     return db_project
 
 
@@ -85,7 +96,15 @@ def read_quizes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def read_quiz(quiz_id: int, db: Session = Depends(get_db)):
     db_quiz = QuizService.get_quiz(db, quiz_id=quiz_id)
     if db_quiz is None:
-        raise HTTPException(status_code=404, detail="quiz not found")
+        raise HTTPException(status_code=404, detail="Quiz not found")
+    return db_quiz
+
+
+@app.post("/quizes/answer", response_model=QuizAnswerResult)
+def read_quiz(quiz_answer: QuizAnswerSchema, db: Session = Depends(get_db)):
+    db_quiz = QuizService.answer_quiz(db, quiz_answer=quiz_answer)
+    if db_quiz is None:
+        raise HTTPException(status_code=404, detail="Quiz not found")
     return db_quiz
 
 
@@ -105,7 +124,7 @@ def read_questions(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 def read_question(question_id: int, db: Session = Depends(get_db)):
     db_question = QuestionService.get_question(db, question_id=question_id)
     if db_question is None:
-        raise HTTPException(status_code=404, detail="question not found")
+        raise HTTPException(status_code=404, detail="Question not found")
     return db_question
 
 
@@ -125,8 +144,34 @@ def read_answers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db))
 def read_answer(answer_id: int, db: Session = Depends(get_db)):
     db_answer = AnswerService.get_answer(db, answer_id=answer_id)
     if db_answer is None:
-        raise HTTPException(status_code=404, detail="answer not found")
+        raise HTTPException(status_code=404, detail="Answer not found")
     return db_answer
+
+
+# PROFILES
+@app.post("/profiles/", response_model=ProfileSchema)
+def create_profile(profile: ProfileCreateSchema, db: Session = Depends(get_db)):
+    return ProfileService.create_profile(db=db, profile=profile)
+
+
+@app.get("/profiles/{wallet}", response_model=ProfileSchema)
+def read_profile(wallet: str, db: Session = Depends(get_db)):
+    db_profile = ProfileService.get_profile_by_wallet(db, wallet=wallet)
+    if db_profile is None:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return db_profile
+
+
+@app.get("/profiles/", response_model=List[ProfileSchema])
+def read_profiles(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    _profiles = ProfileService.get_profiles(db, skip=skip, limit=limit)
+    return _profiles
+
+
+@app.patch("/profiles/{wallet}/nft", response_model=ProfileSchema)
+def save_nft(wallet: str, nft: ProfileCreateNftSchema, db: Session = Depends(get_db)):
+    print(nft, wallet)
+    return ProfileService.create_profile_nft(db=db, wallet=wallet, nft=nft)
 
 
 @app.get("/")

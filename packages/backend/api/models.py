@@ -46,3 +46,12 @@ class Answer(Base):
     question_id = Column(Integer, ForeignKey("questions.id"))
 
     question = relationship("Question", back_populates="answers")
+
+
+class Profile(Base):
+    __tablename__ = "profiles"
+
+    id = Column(Integer, primary_key=True, index=True)
+    nickname = Column(String, index=True)
+    wallet = Column(String, unique=True, index=True)
+    nfts = Column(String)

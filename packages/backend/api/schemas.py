@@ -5,40 +5,53 @@ from pydantic import BaseModel
 class AnswerBase(BaseModel):
     question_id: int
     answer: str
-    valid: bool = False
+    is_valid: bool = False
+
 
 class AnswerCreateSchema(AnswerBase):
     pass
 
+
 class AnswerSchema(AnswerBase):
     id: int
+
     class Config:
         orm_mode = True
+
 
 class AnswerToRead(BaseModel):
     id: int
     answer: str
+
     class Config:
         orm_mode = True
+
 
 # QUESTION
 class QuestionBase(BaseModel):
     quiz_id: int
     question: str
 
+
 class QuestionCreateSchema(QuestionBase):
     pass
+
+
 class QuestionSchema(QuestionBase):
     id: int
+
     class Config:
         orm_mode = True
+
 
 class QuestionToRead(BaseModel):
     id: int
     question: str
     answers: List[AnswerToRead]
+
     class Config:
         orm_mode = True
+
 
 # QUIZ
 class QuizBase(BaseModel):
@@ -49,11 +62,13 @@ class QuizBase(BaseModel):
 class QuizCreateSchema(QuizBase):
     pass
 
+
 class QuizSchema(QuizBase):
     id: int
 
     class Config:
         orm_mode = True
+
 
 class QuizToRead(BaseModel):
     id: int
@@ -63,14 +78,34 @@ class QuizToRead(BaseModel):
     class Config:
         orm_mode = True
 
+
+class QuizAnswerResult(BaseModel):
+    correct: int
+    incorrect: int
+    result: bool
+
+
+class QuizAnswerPair(BaseModel):
+    question_id: int
+    answer_id: int
+
+
+class QuizAnswerSchema(BaseModel):
+    wallet: str
+    quiz_id: int
+    answers: List[QuizAnswerPair]
+
+
 # PROJECT
 class ProjectBase(BaseModel):
     name: str
     logo: str
     description: Union[str, None] = None
 
+
 class ProjectCreateSchema(ProjectBase):
     pass
+
 
 class ProjectSchema(ProjectBase):
     id: int
@@ -80,40 +115,23 @@ class ProjectSchema(ProjectBase):
         orm_mode = True
 
 
+# PROFILES
+class ProfileBase(BaseModel):
+    wallet: str
+    nickname: str = None
+    nfts: str = None
 
 
+class ProfileCreateSchema(ProfileBase):
+    pass
 
 
+class ProfileCreateNftSchema(BaseModel):
+    nft: str
 
 
+class ProfileSchema(ProfileBase):
+    id: int
 
-
-# Project: "MOONBEAN"
-#     Quiz: #1231
-#         Question: 001 - name of the creators?
-#             answer: 001 - "fred and tell" valid: False
-#             answer: 002 - "Pepe y Moni" valid: False
-#             answer: 003 - "Peter and Jhon" valid: True
-
-#         Question: 002 - En que año inicio?
-#             answer: 004 - "2014" valid: False
-#             answer: 005 - "2021" valid: True
-#             answer: 006 - "2022" valid: False
-
-
-# {
-#     wallet: 012873640182736401287346012,
-#     quiz: {
-#         id: 1231,
-#         answers: {
-#             {
-#                 question: 001,
-#                 answer: 002
-#             },
-#             {
-#                 question: 002,
-#                 answer: 005
-#             },
-#         }
-#     }
-# }
+    class Config:
+        orm_mode = True
