@@ -1,5 +1,6 @@
 # CityQuiz3 
 
+![NFT](/assets/logo.png)
 <!-- # Index -->
 
 <!-- Introduction
