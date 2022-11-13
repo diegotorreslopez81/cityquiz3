@@ -22,11 +22,17 @@ class QuizService:
         return db_quiz
 
     def answer_quiz(db: Session, quiz_answer: QuizAnswerSchema):
-        db_questions = db.query(Question).filter(Question.quiz_id == quiz_answer.quiz_id).all()
+        db_questions = (
+            db.query(Question).filter(Question.quiz_id == quiz_answer.quiz_id).all()
+        )
         valid_answers = {}
-        answer_result = dict(correct = 0, incorrect = 0, result = False)
+        answer_result = dict(correct=0, incorrect=0, result=False)
         for db_question in db_questions:
-            db_valid_answer = db.query(Answer).filter(Answer.question_id == db_question.id, Answer.is_valid==True).first()
+            db_valid_answer = (
+                db.query(Answer)
+                .filter(Answer.question_id == db_question.id, Answer.is_valid == True)
+                .first()
+            )
             valid_answers[db_question.id] = db_valid_answer.id
 
         for profile_answer in quiz_answer.answers:
@@ -35,7 +41,7 @@ class QuizService:
             else:
                 answer_result["incorrect"] += 1
 
-        if answer_result["correct"]/len(valid_answers) > 0.7:
+        if answer_result["correct"] / len(valid_answers) > 0.7:
             answer_result["result"] = True
-        
+
         return answer_result
