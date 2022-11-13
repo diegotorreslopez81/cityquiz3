@@ -1,4 +1,4 @@
 # cityquiz3
 
 
-Hay que actualizar el redme
+Hay que actualizar el readme.md
