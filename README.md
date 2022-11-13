@@ -23,7 +23,10 @@ For the MVP, we have implemented a simple mechanic where the user can login or r
 
 ## Video
 
-[<img src=".\assets\video.jpg" width="50%">](https://cityquiz3.xyz/assets/videos/video01.mp4?v=b43d98da "Now in Android: 55")
+![City](/assets/screenshoot.jpg)
+
+
+![Quiz](/assets/screenshoot2.jpg)
 
 
 ## Vision
@@ -35,6 +38,10 @@ Our mission is to develop the knowledge protocol. By receiving NFTs as certifica
 
 We propose the creation of a video game, under the "Play To Earn" modality, "Learn To Earn", focused on encouraging its users to research, educate and discover the tools and projects that exist within a Blockchain, where by meeting objectives you will be able to unlock rewards in NFT related to the Blockchain in question.
 A city in squares, where your character is identified by a wallet, where you can move around the different circuits of the city and find a key piece to complete your collection
+
+## Screenshots
+
+[<img src=".\assets\video.jpg" width="50%">](https://cityquiz3.xyz/assets/videos/video01.mp4?v=b43d98da "Now in Android: 55")
 
 
 ## Installation 
